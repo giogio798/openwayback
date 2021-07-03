@@ -1,5 +1,6 @@
 package org.archive.wayback.accesscontrol.oracleclient;
 
+
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -10,7 +11,6 @@ import org.archive.util.ArchiveUtils;
 import org.archive.wayback.accesspoint.AccessPointAdapter;
 import org.archive.wayback.core.CaptureSearchResult;
 import org.archive.wayback.util.ObjectFilter;
-
 /**
  * Oracle Filter Implementation that supports custom policies in addition to
  * allow, block, block-message and robots
@@ -43,8 +43,12 @@ public class CustomPolicyOracleFilter extends OracleExclusionFilter {
 	// instances to make CustomPolicyOracleFilter runtime-configurable.
 	enum Policy {
 		ALLOW("allow"),
+	
+		
+		
 		BLOCK_HIDDEN("block") {
 			@Override
+			
 			int apply(CaptureSearchResult capture, OracleExclusionFilter filter) {
 				// mark capture blocked, and include in the result (see ARI-3879).
 				// no message is given to user.
@@ -54,12 +58,14 @@ public class CustomPolicyOracleFilter extends OracleExclusionFilter {
 			}
 		},
 		BLOCK_MESSAGE("block-message") {
+			
 			@Override
 			int apply(CaptureSearchResult capture, OracleExclusionFilter filter) {
 				return filter.handleBlock();
 			}
 		},
 		ROBOTS("robots") {
+			
 			@Override
 			int apply(CaptureSearchResult capture, OracleExclusionFilter filter) {
 				return filter.handleRobots();
@@ -147,3 +153,4 @@ public class CustomPolicyOracleFilter extends OracleExclusionFilter {
 		return defaultFilter;
 	}
 }
+
